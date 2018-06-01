@@ -33,7 +33,7 @@ MongoClient.connect('mongodb://localhost:27017', function(err, client){
 });
 
 module.exports = {
-	list: function(cb){
+	list: function(cb){	
 		db.board.find({}, {content: 0})
 						.sort({_id: -1})
 						.toArray(function(err, result){
