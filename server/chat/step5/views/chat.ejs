@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>Node.js</title>
+<meta charset="utf-8">
+<title>채팅</title>
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body class="well">
+	<h1><%=title%></h1>
+	<div class="form-group">	  		
+		<textarea id="panel" rows="20" cols="70"  class="form-control" disabled></textarea>
+	</div>
+
+	<% if(nickname){ %>
+		<div class="form-inline">
+			<output><%=nickname%></output>
+			<input class="form-control" type="text" size="80" autofocus>
+			<button type="button" class="btn btn-success">메세지 전송</button>
+			<a href="/logout"><button type="submit" class="btn btn-danger">로그아웃</button></a>
+		</div>
+	<% }else{ %>
+		<a href="/">로그인</a> 후에 이용하세요.
+	<% } %>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		// 웹소켓 접속
+		var s = io.connect('ws://localhost');
+
+		// 서버의 메세지 출력
+		var msgout = document.querySelector('#panel');
+		s.on('chat', function(msg){
+			msgout.value += msg + '\n';
+			msgout.scrollTop = msgout.scrollHeight;
+		});
+
+		// 로그인
+		s.emit('login', '<%=nickname%>');
+
+		// 서버로 메세지 전송
+		var msg = document.querySelector('input');
+		function send(){
+			s.emit('chat', msg.value);
+			msg.value = '';
+			msg.focus();
+		}
+
+		// 클릭 이벤트 추가
+		if(msg){
+			document.querySelector('button').onclick = send;
+			msg.onkeydown = function(e){
+				if(e.keyCode == 13) send();
+			};
+		}
+
+	</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

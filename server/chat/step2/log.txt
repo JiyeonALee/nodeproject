@@ -1,0 +1,5 @@
+Wed May 30 2018 13:43:37 GMT+0900 (대한민국 표준시) 200 /index.html
+Wed May 30 2018 13:43:38 GMT+0900 (대한민국 표준시) 404 /favicon.ico
+Wed May 30 2018 13:43:47 GMT+0900 (대한민국 표준시) 200 /chat.html?username=hgfhgfhgf
+Wed May 30 2018 13:53:57 GMT+0900 (대한민국 표준시) 200 /index.html
+Wed May 30 2018 13:54:01 GMT+0900 (대한민국 표준시) 200 /chat.html?username=hgf
