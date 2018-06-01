@@ -69,5 +69,8 @@ module.exports = {
 	},
 	findUser: function(id, cb){
 		db.user.findOne({_id: id}, {name: 1}, cb);
+	},
+	close: function() {
+		mongo.close();
 	}
 };
