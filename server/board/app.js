@@ -29,20 +29,24 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  cookie: {maxAge: 1000*60*60},
+  secret: 'some text',
+  rolling: true // 매 응답마다 쿠키 시간 초기화
+}));
+
 app.use(function(req, res, next){
   if(typeof req.body == 'object' 
           && '_method' in req.body){
     req.method = req.body._method;
     delete req.body._method;
   }
+
+  console.log(req.session);
   next();
 });
 
-app.use(session({
-  cookie: {maxAge: 1000*60*60},
-  secret: 'some text',
-  rolling: true // 매 응답마다 쿠키 시간 초기화
-}));
+
 
 app.use(passport.initialize());
 app.use(passport.session());
